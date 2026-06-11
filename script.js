@@ -1,53 +1,92 @@
 
-let number1;
-let number2;
-let operator;
-let total;
+let number1="";
+let number2="";
+let operator_val="";
 
-function add(a,b){
-    return a+b;
-};
 
-console.log(add(1,2));
+const number=document.querySelectorAll(".number");
+const display=document.querySelector(".display");
+const operator=document.querySelectorAll(".operator");
+const eq=document.querySelector(".eq");
+const all_clear=document.querySelector(".clearall");
+const clear=document.querySelector(".clear");
+const button=document.querySelectorAll(".button");
 
-const subtract=(a,b)=>{
-    return a-b;
-}
 
-console.log(subtract(1,2));
+clear.addEventListener("click",()=>{
+    if(number2!==""){
+        number2=number2.slice(0,-1);
+    }
+    else if(operator_val!==""){
+        operator_val=operator_val.slice(0,-1);
+    }
+    else{
+        number1=number1.slice(0,-1);
+    }
+    display.innerText=number1+operator_val+number2;
+})
 
-const multiply=(a,b)=>{
-    return a*b;
-}
-console.log(multiply(5,2));
 
-const divide=(a,b)=>{
-    if(b===0)return "syntax error";
-    return a/b;
-    //should check for if array includes 0 for syntax error
-    //keeping in reduce method will cause total to become syntax error cousing nan
-}
+all_clear.addEventListener("click",()=>{
+    number1="";
+    number2="";
+    operator_val="";
+    display.innerHTML="";
+})
 
-console.log(divide(50,5));
+eq.addEventListener("click",()=>{
+    if(number1!=="" && number2===""){
+        display.innerText=number1;
+    }
+    else if(number1!=="" && number2!==""){
+        const total=operate(parseFloat(number1),parseFloat(number2),operator_val);
+        number1=total.toString();
+        number2="";
+        operator_val="";
+        display.innerText=`${total}`;
+    }
+})
+
+operator.forEach((operator)=>{
+    operator.addEventListener("click",()=>{
+        if(number1==="")return;
+        operator_val=operator.innerText;
+        display.innerText=number1+operator_val+number2;
+    })
+    
+})
+
+number.forEach((number)=>{
+    number.addEventListener("click",()=>{
+        if(operator_val===""){
+            number1+=number.innerText;
+        }
+        else{
+            number2+=number.innerText;
+        }
+        display.innerText=number1+operator_val+number2;
+    })
+})
+
 
 const operate=(number1,number2,operator)=>{
-    let arr=[number1,number2];
+    
     if(operator==='+'){
-        total=add(number1,number2);
-        return total;
+        return number1+number2;
     }
     else if(operator==='-'){
-        total=subtract(number1,number2);
-        return total;
+        return number1-number2;
     }
     else if(operator==='*'){
-        total=multiply(number1,number2);
-        return total;
+        return number1*number2;
     }
     else if(operator==='/'){
-        total=divide(number1,number2);
-        return total;
+        if(number2===0){
+            return "syntax error";
+        }else{
+            return number1/number2;
+        }
+        
     }
-}
 
-console.log(operate(4,5,"/"));
+}

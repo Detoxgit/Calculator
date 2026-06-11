@@ -30,4 +30,35 @@ body{
     margin:20px 5px 10px 5px;
     border-radius: 30px;
     background-color: #393c39;
+    display:flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right:20px;
+    padding-bottom:5px;
+    font-size: 40px;
+    color:#1e201e;
+    font-family: "VT323",monospace;
+    font-weight: 400;
+    font-style: normal;
+    overflow: hidden;
+}
+
+
+.numbers{
+    height:75%;
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    padding:2px;
+}
+
+.button{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    font-size: 20px;
+    background-color:#D36135;
+    color:white;
+    cursor:grab;
+    box-shadow: 0 2px 2px 2px rgb(37, 35, 35);
 }
